@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D5D5B334-5AA7-44A5-A895-DB6BB0FA3419}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GD.Soft.DataAnalysis.Snapshot</RootNamespace>
+    <AssemblyName>GD.Soft.DataAnalysis.Snapshot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Polly, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Polly.4.3.0\lib\net40\Polly.dll</HintPath>
+    </Reference>
+    <Reference Include="Selenium.WebDriverBackedSelenium">
+      <HintPath>..\..\docs\selenium-dotnet-3.4.0\net40\Selenium.WebDriverBackedSelenium.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver">
+      <HintPath>..\..\docs\selenium-dotnet-3.4.0\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\docs\selenium-dotnet-3.4.0\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultEngineFactory.cs" />
+    <Compile Include="Entities\BrowserItem.cs" />
+    <Compile Include="Entities\Browsers\IE.cs" />
+    <Compile Include="Entities\Browsers\PhantomJS.cs" />
+    <Compile Include="Entities\pageScripts.cs" />
+    <Compile Include="Entities\TimeoutSet.cs" />
+    <Compile Include="Infrastructure\Activators\PageActionActivator.cs" />
+    <Compile Include="Infrastructure\Activators\ResultAgrsActivator.cs" />
+    <Compile Include="Entities\ResultArgs.cs" />
+    <Compile Include="Infrastructure\Common\ResiliencePolicy.cs" />
+    <Compile Include="Infrastructure\Services\Abstractions\IBrowserService.cs" />
+    <Compile Include="Infrastructure\Services\Abstractions\IEngineFactory.cs" />
+    <Compile Include="Entities\PageActions.cs" />
+    <Compile Include="Entities\FilterItem.cs" />
+    <Compile Include="Entities\Operation.cs" />
+    <Compile Include="Entities\JSScript.cs" />
+    <Compile Include="Infrastructure\Activators\ScreenshotActivator.cs" />
+    <Compile Include="Infrastructure\Activators\WebDriverActivator.cs" />
+    <Compile Include="Infrastructure\Exceptions\SnapshotBuildException.cs" />
+    <Compile Include="Infrastructure\Services\Abstractions\ILocalFilesSystemService.cs" />
+    <Compile Include="Infrastructure\Services\DefaultBrowserService.cs" />
+    <Compile Include="Infrastructure\Services\DefaultLocalFilesSystemService.cs" />
+    <Compile Include="IntegrationEvents\Events\OnCompletedIntegrationEvent.cs" />
+    <Compile Include="IntegrationEvents\Events\OnErroredIntegrationEvent.cs" />
+    <Compile Include="IntegrationEvents\Events\OnStartupIntegrationEvent.cs" />
+    <Compile Include="IntegrationEvents\IntegrationEvent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnapshotEngine.cs" />
+    <Compile Include="ValueObjects\ConstDefines.cs" />
+    <Compile Include="ValueObjects\EnumDefines.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="README.md" />
+    <None Include="snapshot_domainModel.oom" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components\IE\IEDriverServer.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Components\phantomjs\phantomjs.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="snapshot_domainModel.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
